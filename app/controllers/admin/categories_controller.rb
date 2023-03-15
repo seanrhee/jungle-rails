@@ -1,8 +1,7 @@
 class Admin::CategoriesController < ApplicationController
-  http_basic_authenticate_with name: ENV['ADMIN_USERNAME'], password: ENV['ADMIN_PASSWORD']
 
   def index
-    @categories = Catergory.order(id: :desc).all
+    @categories = Category.order(id: :desc).all
   end
 
   def new
@@ -19,12 +18,6 @@ class Admin::CategoriesController < ApplicationController
     end
   end
 
-  def destroy
-    @product = Product.find params[:id]
-    @product.destroy
-    redirect_to [:admin, :products], notice: 'Product deleted!'
-  end
-
   private
 
   def category_params
@@ -32,4 +25,5 @@ class Admin::CategoriesController < ApplicationController
       :name
     )
   end
+
 end
